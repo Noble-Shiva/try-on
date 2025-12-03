@@ -1,0 +1,262 @@
+/**
+ * PhotoUploader Styles
+ */
+
+.tryon-uploader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--tryon-overlay);
+  z-index: var(--tryon-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--tryon-space-md);
+  animation: tryon-fade-in var(--tryon-transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.tryon-uploader {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background: var(--tryon-background);
+  border-radius: var(--tryon-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: tryon-scale-in var(--tryon-transition-normal);
+  overflow: hidden;
+}
+
+.tryon-uploader-header {
+  padding: var(--tryon-space-lg);
+  border-bottom: 1px solid var(--tryon-border);
+}
+
+.tryon-uploader-title {
+  font-size: var(--tryon-font-size-lg);
+  font-weight: var(--tryon-font-weight-bold);
+  color: var(--tryon-text);
+  margin: 0 0 var(--tryon-space-sm) 0;
+}
+
+.tryon-uploader-subtitle {
+  font-size: var(--tryon-font-size-sm);
+  color: var(--tryon-text-secondary);
+  margin: 0;
+}
+
+.tryon-uploader-body {
+  padding: var(--tryon-space-lg);
+}
+
+.tryon-uploader-dropzone {
+  border: 2px dashed var(--tryon-border);
+  border-radius: var(--tryon-radius-md);
+  padding: var(--tryon-space-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--tryon-transition-fast);
+  background: transparent;
+}
+
+.tryon-uploader-dropzone:hover {
+  border-color: var(--tryon-primary);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.tryon-uploader-dropzone--active {
+  border-color: var(--tryon-primary);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tryon-uploader-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--tryon-space-md);
+  color: var(--tryon-text-secondary);
+}
+
+.tryon-uploader-text {
+  font-size: var(--tryon-font-size-md);
+  color: var(--tryon-text);
+  margin-bottom: var(--tryon-space-sm);
+}
+
+.tryon-uploader-hint {
+  font-size: var(--tryon-font-size-sm);
+  color: var(--tryon-text-secondary);
+}
+
+.tryon-uploader-or {
+  display: flex;
+  align-items: center;
+  margin: var(--tryon-space-lg) 0;
+  color: var(--tryon-text-secondary);
+  font-size: var(--tryon-font-size-sm);
+}
+
+.tryon-uploader-or::before,
+.tryon-uploader-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--tryon-border);
+}
+
+.tryon-uploader-or::before {
+  margin-right: var(--tryon-space-md);
+}
+
+.tryon-uploader-or::after {
+  margin-left: var(--tryon-space-md);
+}
+
+.tryon-uploader-webcam-btn {
+  width: 100%;
+  padding: var(--tryon-space-md);
+  background: transparent;
+  border: 1px solid var(--tryon-border);
+  border-radius: var(--tryon-radius-md);
+  font-size: var(--tryon-font-size-md);
+  color: var(--tryon-text);
+  cursor: pointer;
+  transition: all var(--tryon-transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tryon-space-sm);
+}
+
+.tryon-uploader-webcam-btn:hover {
+  border-color: var(--tryon-primary);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.tryon-uploader-preview {
+  margin-top: var(--tryon-space-lg);
+  text-align: center;
+}
+
+.tryon-uploader-preview-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: var(--tryon-radius-md);
+  box-shadow: 0 4px 12px var(--tryon-shadow);
+}
+
+.tryon-uploader-preview-info {
+  margin-top: var(--tryon-space-md);
+  font-size: var(--tryon-font-size-sm);
+  color: var(--tryon-text-secondary);
+}
+
+.tryon-uploader-guidelines {
+  margin-top: var(--tryon-space-lg);
+  padding: var(--tryon-space-md);
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: var(--tryon-radius-md);
+  border-left: 3px solid #2196f3;
+}
+
+.tryon-uploader-guidelines-title {
+  font-size: var(--tryon-font-size-sm);
+  font-weight: var(--tryon-font-weight-bold);
+  color: #1565c0;
+  margin: 0 0 var(--tryon-space-sm) 0;
+}
+
+.tryon-uploader-guidelines-list {
+  margin: 0;
+  padding-left: var(--tryon-space-lg);
+  font-size: var(--tryon-font-size-sm);
+  color: var(--tryon-text-secondary);
+}
+
+.tryon-uploader-guidelines-list li {
+  margin: 4px 0;
+}
+
+.tryon-uploader-guidelines-list .good {
+  color: #2e7d32;
+}
+
+.tryon-uploader-guidelines-list .bad {
+  color: #c62828;
+}
+
+.tryon-uploader-footer {
+  padding: var(--tryon-space-md) var(--tryon-space-lg);
+  border-top: 1px solid var(--tryon-border);
+  display: flex;
+  gap: var(--tryon-space-md);
+  justify-content: flex-end;
+}
+
+.tryon-uploader-button {
+  padding: var(--tryon-space-sm) var(--tryon-space-lg);
+  border-radius: var(--tryon-radius-md);
+  font-size: var(--tryon-font-size-md);
+  font-weight: var(--tryon-font-weight-medium);
+  border: none;
+  cursor: pointer;
+  transition: all var(--tryon-transition-fast);
+}
+
+.tryon-uploader-button--primary {
+  background: var(--tryon-primary);
+  color: var(--tryon-background);
+}
+
+.tryon-uploader-button--primary:hover:not(:disabled) {
+  background: var(--tryon-primary-hover);
+}
+
+.tryon-uploader-button--secondary {
+  background: transparent;
+  color: var(--tryon-text);
+  border: 1px solid var(--tryon-border);
+}
+
+.tryon-uploader-button--secondary:hover {
+  background: var(--tryon-border);
+}
+
+.tryon-uploader-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Webcam view */
+.tryon-uploader-webcam {
+  position: relative;
+}
+
+.tryon-uploader-webcam-video {
+  width: 100%;
+  border-radius: var(--tryon-radius-md);
+  background: #000;
+}
+
+.tryon-uploader-webcam-controls {
+  margin-top: var(--tryon-space-md);
+  display: flex;
+  gap: var(--tryon-space-md);
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tryon-uploader {
+    max-width: 95vw;
+  }
+
+  .tryon-uploader-footer {
+    flex-direction: column;
+  }
+
+  .tryon-uploader-button {
+    width: 100%;
+  }
+}

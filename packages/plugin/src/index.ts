@@ -17,6 +17,9 @@ import { TryOnPlugin, type PluginConfig } from './TryOnPlugin';
 import '@try-on/core/src/ui/styles/theme.css';
 import '@try-on/core/src/ui/styles/button.css';
 import '@try-on/core/src/ui/styles/modal.css';
+import '@try-on/core/src/ui/styles/uploader.css';
+import '@try-on/core/src/ui/styles/spinner.css';
+import '@try-on/core/src/ui/styles/toast.css';
 
 // Global instance
 let pluginInstance: TryOnPlugin | null = null;

@@ -7,7 +7,7 @@ import type { ITryOnProvider, TryOnRequest, TryOnResponse, TryOnError } from '..
 import { PROVIDERS, ENDPOINTS, COSTS } from '../config/constants';
 
 export class NanoBananaClient implements ITryOnProvider {
-  readonly name = PROVIDERS.NANO_BANANA as const;
+  readonly name: 'nano-banana' = 'nano-banana';
   private apiKey: string;
   private endpoint: string;
 

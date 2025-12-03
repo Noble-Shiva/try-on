@@ -7,7 +7,7 @@ import type { ITryOnProvider, TryOnRequest, TryOnResponse, TryOnError } from '..
 import { PROVIDERS, ENDPOINTS, COSTS } from '../config/constants';
 
 export class IDMVTONClient implements ITryOnProvider {
-  readonly name = PROVIDERS.IDM_VTON as const;
+  readonly name: 'idm-vton' = 'idm-vton';
   private apiToken: string;
   private modelVersion: string;
 

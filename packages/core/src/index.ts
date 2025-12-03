@@ -11,7 +11,7 @@ export { TryOnService, NanaBananaClient, IDMVTONClient } from './api';
 export { ImageDetector, DOMScanner } from './detection';
 
 // Export UI components
-export { TryOnButton, Modal } from './ui';
+export { TryOnButton, Modal, PhotoUploader, LoadingSpinner, ToastManager, toast } from './ui';
 
 // Export storage
 export { PhotoStorage, CacheManager, LocalStorageWrapper, IndexedDBStorage } from './storage';

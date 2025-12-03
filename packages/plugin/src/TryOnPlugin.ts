@@ -7,6 +7,9 @@ import {
   ImageDetector,
   TryOnButton,
   Modal,
+  PhotoUploader,
+  LoadingSpinner,
+  toast,
   PhotoStorage,
   CacheManager,
   createTryOnService,
@@ -53,6 +56,8 @@ export class TryOnPlugin {
   private photoStorage?: PhotoStorage;
   private cacheManager?: CacheManager;
   private modal?: Modal;
+  private photoUploader?: PhotoUploader;
+  private loadingSpinner?: LoadingSpinner;
   private buttons: Map<string, TryOnButton> = new Map();
   private initialized: boolean = false;
 
@@ -92,6 +97,21 @@ export class TryOnPlugin {
 
       // Initialize modal
       this.modal = new Modal(this.config.modal);
+
+      // Initialize photo uploader
+      this.photoUploader = new PhotoUploader({
+        enableWebcam: true,
+        accept: ['image/jpeg', 'image/png', 'image/webp'],
+        maxSize: 10 * 1024 * 1024,
+        showPreview: true,
+        instructions: 'Upload a clear, well-lit photo of yourself'
+      });
+
+      // Initialize loading spinner
+      this.loadingSpinner = new LoadingSpinner({
+        message: 'Processing your try-on...',
+        hint: 'This may take a few seconds'
+      });
 
       // Initialize detector
       this.detector = new ImageDetector({
@@ -174,6 +194,7 @@ export class TryOnPlugin {
 
         if (cached) {
           this.log('Using cached result');
+          toast.info('Loading from cache...');
           resultUrl = cached.resultUrl;
         }
       }
@@ -181,6 +202,11 @@ export class TryOnPlugin {
       // If not cached, make API call
       if (!resultUrl && this.tryOnService) {
         this.log('Making try-on API call...');
+
+        // Show loading spinner
+        if (this.loadingSpinner) {
+          this.loadingSpinner.show();
+        }
 
         const result = await this.tryOnService.tryOn({
           personImage: userPhoto.dataUrl,
@@ -191,11 +217,19 @@ export class TryOnPlugin {
 
         resultUrl = result.resultImage;
 
+        // Hide loading spinner
+        if (this.loadingSpinner) {
+          this.loadingSpinner.hide();
+        }
+
         // Cache result
         if (this.cacheManager && resultUrl) {
           const cacheKey = this.cacheManager.generateKey(userPhoto.dataUrl, image.src);
           await this.cacheManager.set(cacheKey, resultUrl, result.provider);
         }
+
+        // Show success toast
+        toast.success('Try-on completed successfully!');
 
         // Call success callback
         if (this.config.onSuccess) {
@@ -213,13 +247,18 @@ export class TryOnPlugin {
       this.log('Try-on failed:', error);
       button.setLoading(false);
 
+      // Hide loading spinner if visible
+      if (this.loadingSpinner) {
+        this.loadingSpinner.hide();
+      }
+
       // Call error callback
       if (this.config.onError) {
         this.config.onError(error as Error);
       }
 
-      // Show error message
-      alert('Failed to process try-on. Please try again.');
+      // Show error toast
+      toast.error('Failed to process try-on. Please try again.');
     }
   }
 
@@ -227,7 +266,7 @@ export class TryOnPlugin {
    * Get user photo (prompt upload if needed)
    */
   private async getUserPhoto(): Promise<{ dataUrl: string } | null> {
-    if (!this.photoStorage) return null;
+    if (!this.photoStorage || !this.photoUploader) return null;
 
     // Check if user has a default photo
     const defaultPhoto = await this.photoStorage.getDefaultPhoto();
@@ -236,30 +275,25 @@ export class TryOnPlugin {
       return { dataUrl: defaultPhoto.dataUrl };
     }
 
-    // Prompt for photo upload
+    // Prompt for photo upload using PhotoUploader
     return new Promise((resolve) => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-
-      input.onchange = async (e) => {
-        const file = (e.target as HTMLInputElement).files?.[0];
-        if (!file || !this.photoStorage) {
-          resolve(null);
-          return;
-        }
-
-        try {
-          const photo = await this.photoStorage.savePhoto(file);
-          resolve({ dataUrl: photo.dataUrl });
-        } catch (error) {
-          this.log('Failed to save photo:', error);
-          alert('Failed to process photo. Please try again.');
+      this.photoUploader!.show(
+        async (file: File) => {
+          try {
+            const photo = await this.photoStorage!.savePhoto(file);
+            toast.success('Photo uploaded successfully!');
+            resolve({ dataUrl: photo.dataUrl });
+          } catch (error) {
+            this.log('Failed to save photo:', error);
+            toast.error('Failed to process photo. Please try again.');
+            resolve(null);
+          }
+        },
+        () => {
+          // User cancelled
           resolve(null);
         }
-      };
-
-      input.click();
+      );
     });
   }
 
@@ -281,6 +315,16 @@ export class TryOnPlugin {
     // Destroy modal
     if (this.modal) {
       this.modal.destroy();
+    }
+
+    // Destroy photo uploader
+    if (this.photoUploader) {
+      this.photoUploader.destroy();
+    }
+
+    // Destroy loading spinner
+    if (this.loadingSpinner) {
+      this.loadingSpinner.destroy();
     }
 
     this.initialized = false;

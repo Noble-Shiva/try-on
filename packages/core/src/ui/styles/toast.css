@@ -1,0 +1,185 @@
+/**
+ * Toast Notification Styles
+ */
+
+.tryon-toast-container {
+  position: fixed;
+  z-index: var(--tryon-z-toast);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tryon-space-sm);
+}
+
+.tryon-toast-container--top-right {
+  top: var(--tryon-space-lg);
+  right: var(--tryon-space-lg);
+}
+
+.tryon-toast-container--top-left {
+  top: var(--tryon-space-lg);
+  left: var(--tryon-space-lg);
+}
+
+.tryon-toast-container--top-center {
+  top: var(--tryon-space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tryon-toast-container--bottom-right {
+  bottom: var(--tryon-space-lg);
+  right: var(--tryon-space-lg);
+}
+
+.tryon-toast-container--bottom-left {
+  bottom: var(--tryon-space-lg);
+  left: var(--tryon-space-lg);
+}
+
+.tryon-toast-container--bottom-center {
+  bottom: var(--tryon-space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tryon-toast {
+  pointer-events: auto;
+  min-width: 300px;
+  max-width: 500px;
+  padding: var(--tryon-space-md);
+  border-radius: var(--tryon-radius-md);
+  box-shadow: 0 4px 12px var(--tryon-shadow), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tryon-space-sm);
+  animation: tryon-toast-slide-in 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.tryon-toast--success {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+}
+
+.tryon-toast--error {
+  background: linear-gradient(135deg, #f44336 0%, #e53935 100%);
+  color: white;
+}
+
+.tryon-toast--warning {
+  background: linear-gradient(135deg, #ff9800 0%, #fb8c00 100%);
+  color: white;
+}
+
+.tryon-toast--info {
+  background: linear-gradient(135deg, #2196f3 0%, #1e88e5 100%);
+  color: white;
+}
+
+.tryon-toast-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tryon-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tryon-toast-message {
+  font-size: var(--tryon-font-size-md);
+  font-weight: var(--tryon-font-weight-medium);
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.tryon-toast-close {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity var(--tryon-transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tryon-toast-close:hover {
+  opacity: 1;
+}
+
+.tryon-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0 0 var(--tryon-radius-md) var(--tryon-radius-md);
+  overflow: hidden;
+}
+
+.tryon-toast-progress-bar {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  animation: tryon-toast-progress-shrink linear;
+}
+
+@keyframes tryon-toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tryon-toast-slide-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes tryon-toast-progress-shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.tryon-toast--removing {
+  animation: tryon-toast-slide-out 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tryon-toast-container {
+    left: var(--tryon-space-md) !important;
+    right: var(--tryon-space-md) !important;
+    transform: none !important;
+  }
+
+  .tryon-toast {
+    min-width: 0;
+    width: 100%;
+  }
+}
