@@ -5,7 +5,13 @@
  */
 
 // Export API services
-export { TryOnService, NanoBananaClient, IDMVTONClient } from './api';
+export { TryOnService, NanaBananaClient, IDMVTONClient } from './api';
+
+// Export detection
+export { ImageDetector, DOMScanner } from './detection';
+
+// Export UI components
+export { TryOnButton, Modal } from './ui';
 
 // Export types
 export type {
@@ -17,7 +23,23 @@ export type {
   TryOnOptions,
   ITryOnProvider,
   ProviderConfig
-} from './types';
+} from './types/api';
+
+export type {
+  DetectedImage,
+  DetectionConfig,
+  ScanResult
+} from './types/detection';
+
+export type {
+  ButtonConfig,
+  ButtonPosition,
+  ButtonTheme,
+  ButtonSize,
+  ModalConfig,
+  UploaderConfig,
+  ToastConfig
+} from './types/ui';
 
 // Export constants
 export {
@@ -34,7 +56,7 @@ export {
  * Factory function to create TryOn service instance
  */
 import { TryOnService } from './api';
-import type { ProviderConfig } from './types';
+import type { ProviderConfig } from './types/api';
 
 export function createTryOnService(config: ProviderConfig): TryOnService {
   return new TryOnService(config);

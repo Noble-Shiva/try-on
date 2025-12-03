@@ -1,0 +1,167 @@
+/**
+ * Try-On Button Styles
+ */
+
+.tryon-button-container {
+  display: flex;
+  justify-content: center;
+  margin: var(--tryon-space-sm) 0;
+}
+
+.tryon-button-container--overlay {
+  position: absolute;
+  bottom: var(--tryon-space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--tryon-z-button);
+  margin: 0;
+}
+
+.tryon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tryon-space-sm);
+  padding: var(--tryon-space-sm) var(--tryon-space-md);
+  font-family: var(--tryon-font-family);
+  font-size: var(--tryon-font-size-md);
+  font-weight: var(--tryon-font-weight-medium);
+  color: var(--tryon-background);
+  background-color: var(--tryon-primary);
+  border: none;
+  border-radius: var(--tryon-radius-md);
+  cursor: pointer;
+  transition: all var(--tryon-transition-fast);
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Button sizes */
+.tryon-button--small {
+  padding: 6px 12px;
+  font-size: var(--tryon-font-size-sm);
+  gap: 4px;
+}
+
+.tryon-button--medium {
+  padding: var(--tryon-space-sm) var(--tryon-space-md);
+  font-size: var(--tryon-font-size-md);
+}
+
+.tryon-button--large {
+  padding: 12px 24px;
+  font-size: var(--tryon-font-size-lg);
+  gap: 10px;
+}
+
+/* Button states */
+.tryon-button:hover:not(:disabled) {
+  background-color: var(--tryon-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--tryon-shadow);
+}
+
+.tryon-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--tryon-shadow);
+}
+
+.tryon-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tryon-button:focus-visible {
+  outline: 2px solid var(--tryon-primary);
+  outline-offset: 2px;
+}
+
+/* Button themes */
+.tryon-button--light {
+  color: var(--tryon-text);
+  background-color: var(--tryon-background);
+  border: 1px solid var(--tryon-border);
+}
+
+.tryon-button--light:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  border-color: var(--tryon-primary);
+}
+
+.tryon-button--dark {
+  color: var(--tryon-background);
+  background-color: var(--tryon-text);
+}
+
+.tryon-button--dark:hover:not(:disabled) {
+  background-color: var(--tryon-primary-hover);
+}
+
+/* Loading state */
+.tryon-button--loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.tryon-button--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: tryon-button-spin 0.6s linear infinite;
+}
+
+@keyframes tryon-button-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Icon */
+.tryon-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.tryon-button--small .tryon-button-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.tryon-button--large .tryon-button-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Overlay specific styles */
+.tryon-button-container--overlay .tryon-button {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tryon-button-container--overlay .tryon-button:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tryon-button {
+    padding: 10px 16px;
+    font-size: var(--tryon-font-size-sm);
+  }
+
+  .tryon-button--large {
+    padding: 12px 20px;
+    font-size: var(--tryon-font-size-md);
+  }
+}

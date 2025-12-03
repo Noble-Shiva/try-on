@@ -1,0 +1,153 @@
+/**
+ * Try-On Modal Styles
+ */
+
+.tryon-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--tryon-overlay);
+  z-index: var(--tryon-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--tryon-space-md);
+  animation: tryon-fade-in var(--tryon-transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.tryon-modal {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: var(--tryon-background);
+  border-radius: var(--tryon-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: tryon-scale-in var(--tryon-transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tryon-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--tryon-space-md) var(--tryon-space-lg);
+  border-bottom: 1px solid var(--tryon-border);
+}
+
+.tryon-modal-title {
+  font-size: var(--tryon-font-size-lg);
+  font-weight: var(--tryon-font-weight-bold);
+  color: var(--tryon-text);
+  margin: 0;
+}
+
+.tryon-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--tryon-radius-sm);
+  cursor: pointer;
+  color: var(--tryon-text-secondary);
+  transition: all var(--tryon-transition-fast);
+}
+
+.tryon-modal-close:hover {
+  background: var(--tryon-border);
+  color: var(--tryon-text);
+}
+
+.tryon-modal-body {
+  flex: 1;
+  padding: var(--tryon-space-lg);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--tryon-space-md);
+}
+
+.tryon-modal-image {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: var(--tryon-radius-md);
+  object-fit: contain;
+}
+
+.tryon-modal-footer {
+  display: flex;
+  gap: var(--tryon-space-md);
+  padding: var(--tryon-space-md) var(--tryon-space-lg);
+  border-top: 1px solid var(--tryon-border);
+  justify-content: center;
+}
+
+.tryon-modal-button {
+  padding: var(--tryon-space-sm) var(--tryon-space-lg);
+  font-size: var(--tryon-font-size-md);
+  font-weight: var(--tryon-font-weight-medium);
+  border-radius: var(--tryon-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--tryon-transition-fast);
+}
+
+.tryon-modal-button--primary {
+  background: var(--tryon-primary);
+  color: var(--tryon-background);
+}
+
+.tryon-modal-button--primary:hover {
+  background: var(--tryon-primary-hover);
+}
+
+.tryon-modal-button--secondary {
+  background: transparent;
+  color: var(--tryon-text);
+  border: 1px solid var(--tryon-border);
+}
+
+.tryon-modal-button--secondary:hover {
+  background: var(--tryon-border);
+}
+
+@keyframes tryon-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tryon-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tryon-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .tryon-modal-footer {
+    flex-direction: column;
+  }
+
+  .tryon-modal-button {
+    width: 100%;
+  }
+}

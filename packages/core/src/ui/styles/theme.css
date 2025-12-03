@@ -1,0 +1,90 @@
+/**
+ * Theme variables for Try-On UI components
+ */
+
+:root {
+  /* Colors */
+  --tryon-primary: #000000;
+  --tryon-primary-hover: #333333;
+  --tryon-secondary: #666666;
+  --tryon-background: #ffffff;
+  --tryon-text: #000000;
+  --tryon-text-secondary: #666666;
+  --tryon-border: #e0e0e0;
+  --tryon-shadow: rgba(0, 0, 0, 0.1);
+  --tryon-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Spacing */
+  --tryon-space-xs: 4px;
+  --tryon-space-sm: 8px;
+  --tryon-space-md: 16px;
+  --tryon-space-lg: 24px;
+  --tryon-space-xl: 32px;
+
+  /* Border radius */
+  --tryon-radius-sm: 4px;
+  --tryon-radius-md: 8px;
+  --tryon-radius-lg: 12px;
+  --tryon-radius-full: 9999px;
+
+  /* Typography */
+  --tryon-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --tryon-font-size-sm: 12px;
+  --tryon-font-size-md: 14px;
+  --tryon-font-size-lg: 16px;
+  --tryon-font-weight-normal: 400;
+  --tryon-font-weight-medium: 500;
+  --tryon-font-weight-bold: 600;
+
+  /* Transitions */
+  --tryon-transition-fast: 150ms ease;
+  --tryon-transition-normal: 250ms ease;
+  --tryon-transition-slow: 350ms ease;
+
+  /* Z-index */
+  --tryon-z-button: 100;
+  --tryon-z-modal: 1000;
+  --tryon-z-toast: 2000;
+}
+
+/* Dark theme overrides */
+[data-tryon-theme="dark"] {
+  --tryon-primary: #ffffff;
+  --tryon-primary-hover: #e0e0e0;
+  --tryon-secondary: #999999;
+  --tryon-background: #1a1a1a;
+  --tryon-text: #ffffff;
+  --tryon-text-secondary: #999999;
+  --tryon-border: #333333;
+  --tryon-shadow: rgba(255, 255, 255, 0.1);
+  --tryon-overlay: rgba(0, 0, 0, 0.85);
+}
+
+/* Auto theme - respects system preference */
+@media (prefers-color-scheme: dark) {
+  [data-tryon-theme="auto"] {
+    --tryon-primary: #ffffff;
+    --tryon-primary-hover: #e0e0e0;
+    --tryon-secondary: #999999;
+    --tryon-background: #1a1a1a;
+    --tryon-text: #ffffff;
+    --tryon-text-secondary: #999999;
+    --tryon-border: #333333;
+    --tryon-shadow: rgba(255, 255, 255, 0.1);
+    --tryon-overlay: rgba(0, 0, 0, 0.85);
+  }
+}
+
+/* Reset for Try-On components */
+.tryon-component {
+  box-sizing: border-box;
+  font-family: var(--tryon-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tryon-component *,
+.tryon-component *::before,
+.tryon-component *::after {
+  box-sizing: border-box;
+}
