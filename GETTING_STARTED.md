@@ -64,9 +64,57 @@ DEFAULT_QUALITY=fast
 ENABLE_FALLBACK=true
 ```
 
-## Step 4: Test the Installation
+## Step 4: Verify Your Setup
 
-### Option A: Run Tests
+### Quick Validation (Free - No API Calls)
+
+```bash
+# Check if your API keys are valid
+pnpm check-keys
+```
+
+This will:
+- ✓ Verify .env file exists
+- ✓ Check API key formats
+- ✓ Confirm keys are properly configured
+- ✗ **Does NOT make any API calls** (completely free)
+
+Expected output:
+```
+✓ .env file exists
+🔑 Nano Banana: ✓ Looks valid
+✅ All configured API keys look valid!
+```
+
+### Full API Test (Costs ~$0.01-0.04)
+
+```bash
+# Verify APIs work by making test requests
+pnpm verify-api
+```
+
+This will:
+- Make real API calls to test connectivity
+- Show detailed results for each provider
+- Estimate costs before charging
+- Give you 3 seconds to cancel (Ctrl+C)
+
+⚠️ **Warning**: This makes real API calls and will charge your account.
+
+## Step 5: Try the Demo
+
+```bash
+# Run interactive demo
+pnpm demo
+```
+
+This demonstrates a complete try-on workflow with sample images.
+
+**Cost**: ~$0.01 per run
+
+## Step 6: Run Tests (Optional)
+
+### Option A: Unit Tests (Free)
 
 ```bash
 # Run all tests
@@ -77,18 +125,11 @@ cd packages/core
 pnpm test
 ```
 
-### Option B: Run Example
+### Option B: Integration Tests (Costs Money)
 
-```bash
-# Build the core library first
-cd packages/core
-pnpm build
+Integration tests make real API calls. Only run if you want to test with your actual API keys.
 
-# Run the example
-node examples/basic-usage.ts
-```
-
-## Step 5: Try Your First Virtual Try-On
+## Step 7: Write Your First Try-On
 
 Create a test file `test-tryon.ts`:
 
