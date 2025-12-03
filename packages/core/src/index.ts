@@ -13,6 +13,9 @@ export { ImageDetector, DOMScanner } from './detection';
 // Export UI components
 export { TryOnButton, Modal } from './ui';
 
+// Export storage
+export { PhotoStorage, CacheManager, LocalStorageWrapper, IndexedDBStorage } from './storage';
+
 // Export types
 export type {
   TryOnRequest,
@@ -40,6 +43,12 @@ export type {
   UploaderConfig,
   ToastConfig
 } from './types/ui';
+
+export type {
+  StoredPhoto,
+  CachedResult,
+  IStorage
+} from './types/storage';
 
 // Export constants
 export {

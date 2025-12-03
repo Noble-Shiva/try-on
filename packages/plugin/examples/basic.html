@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Try-On - Basic Example</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .product-info {
+      margin-top: 12px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .add-to-cart {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .instructions {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 16px;
+      margin-bottom: 32px;
+      border-radius: 4px;
+    }
+
+    .instructions h3 {
+      margin-top: 0;
+      color: #1565c0;
+    }
+
+    .instructions ol {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    .instructions li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Virtual Try-On Demo - Basic Integration</h1>
+
+  <div class="instructions">
+    <h3>🎉 How to use this demo:</h3>
+    <ol>
+      <li><strong>Add API Keys:</strong> Edit this HTML file and replace 'your-api-key' with your actual API keys</li>
+      <li><strong>Look for Try-On Buttons:</strong> The plugin will automatically detect clothing images and add "Try On" buttons</li>
+      <li><strong>Click Try On:</strong> Click any "Try On" button below the images</li>
+      <li><strong>Upload Your Photo:</strong> When prompted, upload a photo of yourself</li>
+      <li><strong>See the Result:</strong> Wait a few seconds and see yourself wearing the item!</li>
+    </ol>
+    <p><strong>Note:</strong> You need API keys from <a href="https://fal.ai" target="_blank">fal.ai</a> for this to work.</p>
+  </div>
+
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=600&fit=crop" alt="Blue Denim Jacket" data-product-id="1">
+      <div class="product-info">
+        <div class="product-name">Classic Blue Denim Jacket</div>
+        <div class="product-price">$89.99</div>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=600&fit=crop" alt="White Cotton Shirt" data-product-id="2">
+      <div class="product-info">
+        <div class="product-name">White Cotton Shirt</div>
+        <div class="product-price">$49.99</div>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=600&fit=crop" alt="Black Hoodie" data-product-id="3">
+      <div class="product-info">
+        <div class="product-name">Black Hoodie</div>
+        <div class="product-price">$59.99</div>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1602810318660-d1068f7d60f7?w=400&h=600&fit=crop" alt="Red Sweater" data-product-id="4">
+      <div class="product-info">
+        <div class="product-name">Red Wool Sweater</div>
+        <div class="product-price">$79.99</div>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Try-On Plugin -->
+  <script src="../dist/try-on.js"></script>
+
+  <!-- Initialize Plugin -->
+  <script>
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Initializing Virtual Try-On Plugin...');
+
+      // Initialize the plugin
+      window.TryOn.init({
+        // IMPORTANT: Replace with your actual API key from https://fal.ai
+        nanaBanana: {
+          apiKey: 'your-fal-api-key-here'  // ⚠️ REPLACE THIS
+        },
+
+        // Optional: IDM-VTON for higher quality (slower, more expensive)
+        // idmVton: {
+        //   apiToken: 'your-replicate-token-here'
+        // },
+
+        // Button configuration
+        button: {
+          position: 'bottom',  // 'bottom', 'top', or 'overlay'
+          theme: 'auto',       // 'light', 'dark', or 'auto'
+          size: 'medium',      // 'small', 'medium', or 'large'
+          text: 'Try It On',
+          icon: '👕'
+        },
+
+        // Modal configuration
+        modal: {
+          title: 'Virtual Try-On Result',
+          enableDownload: true,
+          enableShare: true
+        },
+
+        // Detection configuration
+        detection: {
+          minConfidence: 0.6,
+          enableMonitoring: true
+        },
+
+        // Debug mode (shows console logs)
+        debug: true,
+
+        // Callbacks
+        onSuccess: function(result) {
+          console.log('Try-on successful!', result);
+        },
+
+        onError: function(error) {
+          console.error('Try-on failed:', error);
+          alert('Failed to process try-on: ' + error.message);
+        }
+      });
+
+      console.log('Plugin initialized! Look for "Try On" buttons below the images.');
+    });
+  </script>
+</body>
+</html>

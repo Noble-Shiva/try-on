@@ -5,3 +5,4 @@
 export type * from './api';
 export type * from './detection';
 export type * from './ui';
+export type * from './storage';
