@@ -4,8 +4,12 @@ An AI-powered virtual try-on solution that works across any website, available a
 
 ## 📋 Documentation
 
+- **[Getting Started Guide](./GETTING_STARTED.md)** - Set up and run your first try-on ⭐
 - **[Product Requirements Document (PRD)](./PRD.md)** - Complete product specification and roadmap
 - **[API Integration Guide](./API_INTEGRATION_GUIDE.md)** - Technical details for AI API integration
+- **[Architecture](./ARCHITECTURE.md)** - Technical architecture and design patterns
+- **[Implementation Plan](./IMPLEMENTATION_PLAN.md)** - 12-week development roadmap
+- **[Project Structure](./PROJECT_STRUCTURE.md)** - Monorepo organization and conventions
 
 ## 🎯 Overview
 
@@ -28,7 +32,59 @@ Powered by state-of-the-art virtual try-on AI models:
 
 ## 📦 Project Status
 
-Currently in planning phase. See [PRD.md](./PRD.md) for implementation timeline.
+**Current Phase**: Phase 1 Complete ✅
+
+- ✅ Core library with API adapter pattern
+- ✅ Both AI providers integrated (Nano Banana + IDM-VTON)
+- ✅ Flexible environment-based configuration
+- ✅ TypeScript types and comprehensive tests
+- ⏳ **Next**: Website Plugin (Phase 2)
+
+See [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) for full roadmap.
+
+## 🚀 Quick Start
+
+```bash
+# 1. Install dependencies
+pnpm install
+
+# 2. Set up environment
+cp .env.example .env
+# Edit .env and add your API keys (get them from fal.ai and replicate.com)
+
+# 3. Build the core library
+cd packages/core && pnpm build
+
+# 4. Run tests
+pnpm test
+```
+
+See [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed setup instructions.
+
+## 💻 Usage Example
+
+```typescript
+import { createTryOnService } from '@try-on/core';
+
+// Create service with your API keys
+const service = createTryOnService({
+  nanaBanana: {
+    apiKey: process.env.FAL_API_KEY
+  },
+  idmVton: {
+    apiToken: process.env.REPLICATE_API_TOKEN
+  }
+});
+
+// Perform try-on
+const result = await service.tryOn({
+  personImage: 'https://example.com/person.jpg',
+  garmentImage: 'https://example.com/shirt.jpg',
+  quality: 'fast' // or 'high'
+});
+
+console.log('Result:', result.resultImage);
+```
 
 ## 🛠️ Tech Stack (Planned)
 
